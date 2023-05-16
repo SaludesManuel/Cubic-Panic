@@ -218,6 +218,7 @@ GameObject:
   - component: {fileID: 732166652}
   - component: {fileID: 732166651}
   - component: {fileID: 732166653}
+  - component: {fileID: 732166654}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -318,6 +319,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &732166654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 732166650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7eb4e7fd191772446a4a263d4e133bf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Player: {fileID: 0}
+--- !u!1 &1736861177 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7593173425506695516, guid: eb3c4b5b10aafb64fab7a2388e685620, type: 3}
+  m_PrefabInstance: {fileID: 7593173427012525339}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7593173427012525339
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -430,5 +449,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bloque
       objectReference: {fileID: 0}
+    - target: {fileID: 9183702954562454292, guid: 1979c4253ba7c314899d44cf48916cc4, type: 3}
+      propertyPath: m_Player
+      value: 
+      objectReference: {fileID: 1736861177}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1979c4253ba7c314899d44cf48916cc4, type: 3}
