@@ -10,13 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 7593173425506695506}
   - component: {fileID: 7593173425506695507}
-  - component: {fileID: 7593173425506695511}
   - component: {fileID: 7593173425506695504}
   - component: {fileID: 7593173425506695505}
   - component: {fileID: 7593173425506695510}
   - component: {fileID: 7593173425506695509}
+  - component: {fileID: 8088282609383967420}
   m_Layer: 6
-  m_Name: Capsule
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -91,31 +91,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7593173425506695511
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7593173425506695516}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed58421783838be42a5887f78f9a6e1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ThisBlockCarried: 0
-  m_Speed: 5
-  m_JumpForce: 300
-  m_GravityScaleJumping: 1
-  m_GravityScaleFalling: 1
-  m_IsGrounded: 0
-  m_IsActing: 0
-  m_HorizontalGrabCollider: {fileID: 7593173425719737911}
-  m_UpGrabCollider: {fileID: 7593173427183457778}
-  m_DownGrabCollider: {fileID: 7593173425935000685}
-  m_Block: {fileID: 0}
-  m_ArrowSpawnPoint: {fileID: 0}
-  m_CheckPoint: {x: 0, y: 0}
 --- !u!61 &7593173425506695504
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -201,6 +176,28 @@ MonoBehaviour:
     m_Bits: 1
   m_BoxCasterX: 0.5
   m_BoxCasterY: 0.1
+--- !u!114 &8088282609383967420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7593173425506695516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d04e61b76d26b9348a1dd317107e404d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_GrabbedBlock: {fileID: 0}
+  m_IsActing: 0
+  m_Speed: 1
+  m_JumpForce: 200
+  m_GravityScaleJumping: 0.9
+  m_GravityScaleFalling: 2
+  m_IsGrounded: 0
+  m_HorizontalGrabCollider: {fileID: 7593173425719737911}
+  m_UpGrabCollider: {fileID: 7593173427183457778}
+  m_DownGrabCollider: {fileID: 7593173425935000685}
 --- !u!1 &7593173425586569792
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,7 +257,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7593173425719737911}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.2920837, y: -0.5, z: -0.06294762}
+  m_LocalPosition: {x: -0.433, y: -0.5, z: -0.06294762}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

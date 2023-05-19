@@ -4,55 +4,10 @@ using UnityEngine;
 
 public class RobotController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    // Life and knockback
-    // Invencible after hit
-
     // Components
     private Rigidbody2D m_Rigidbody;
     private Animator m_Animator;
-    private Transform m_Transform;
-    public enum BLOCK_CARRIED
-    {
-        NOTHING,
-        BLUE,
-        GREEN,
-        YELLOW,
-        RED
-    }
-
-    public BLOCK_CARRIED m_ThisBlockCarried;
-
-    // Inputs
-    private float m_Horizontal;
-    private bool m_Grabbed;
-    private bool m_JumpPressed;
-
-    // Horizontal movement variables
-    public float m_Speed;
-
-
-    // Jump variables
-    public float m_JumpForce;
-    public float m_GravityScaleJumping = 1f;
-    public float m_GravityScaleFalling = 1f;
-    public bool m_IsGrounded;
-
-    // Attack variables
-    public bool m_IsActing;
-
-    // Grab variables
-    public GameObject m_HorizontalGrabCollider;
-    public GameObject m_UpGrabCollider;
-    public GameObject m_DownGrabCollider;
-
-    // Bow Variables
-    public GameObject m_Block;
-    public Transform m_ArrowSpawnPoint;
-
-    //Interact Variable
-    public Vector2 m_CheckPoint;
-
+    public GameObject m_GrabbedBlock;
     // Player flipping
     private bool m_GoingRight;
 
@@ -68,39 +23,50 @@ public class RobotController : MonoBehaviour
             m_GoingRight = value;
         }
     }
-
-
+    // Inputs
+    private float m_Horizontal;
+    private float m_Vertical;
+    public bool m_GrabPressed;
+    private bool m_JumpPressed;
+    public bool m_IsActing;
+    //Movement variables
+    public float m_Speed;
+    public float m_JumpForce;
+    public float m_GravityScaleJumping = 1f;
+    public float m_GravityScaleFalling = 1f;
+    public bool m_IsGrounded;
+    // Grab variables
+    public GameObject m_HorizontalGrabCollider;
+    public GameObject m_UpGrabCollider;
+    public GameObject m_DownGrabCollider;
+    // Start is called before the first frame update
     void Start()
     {
+        m_IsActing = false;
         m_GoingRight = true;
-        m_ThisBlockCarried = BLOCK_CARRIED.NOTHING;
         m_Rigidbody = GetComponent<Rigidbody2D>();
         m_Animator = GetComponent<Animator>();
-        m_Transform = GetComponent<Transform>();
     }
 
-    private void Update()
+    // Update is called once per frame
+    void Update()
     {
         HandleInputs();
         HandleJump();
-        HandleAnimations();
-        HandleDeath();
+        HandleGrab();
+        DropBlock();
     }
-
     private void FixedUpdate()
     {
         HandleMovement();
     }
-
     private void HandleInputs()
     {
-            m_Horizontal = Input.GetAxisRaw("Horizontal");
-            m_JumpPressed = Input.GetKeyDown(KeyCode.Space);
-            m_Grabbed = Input.GetKeyDown(KeyCode.LeftShift & KeyCode.RightShift);
-            
-
+        m_Horizontal = Input.GetAxis("Horizontal");
+        m_Vertical = Input.GetAxis("Vertical");
+        m_JumpPressed = Input.GetKeyDown(KeyCode.Space);
+        m_GrabPressed = Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift);
     }
-
     private void HandleJump()
     {
         if (m_JumpPressed && m_IsGrounded && !m_IsActing)
@@ -116,64 +82,13 @@ public class RobotController : MonoBehaviour
             m_Rigidbody.gravityScale = m_GravityScaleFalling;
         }
     }
-
     private void HandleMovement()
     {
-        // Running
-        float speedMultiplier = 1;
-        if (m_IsActing)
+        if(!m_IsActing)
         {
-            speedMultiplier = 0;
-        }
-
-        // Applying movement
-        m_Rigidbody.velocity = new Vector2(m_Horizontal * m_Speed * speedMultiplier, m_Rigidbody.velocity.y);
-
-    }
-
-    private void HandleAnimations()
-    {
-        // Blend tree movement animation
-        float animatorSpeed = Mathf.Abs(m_Horizontal);
-        m_Animator.SetFloat("Speed", animatorSpeed);
-
-        m_Animator.ResetTrigger("Jump");
-        if (m_JumpPressed)
-        {
-            m_Animator.SetTrigger("Jump");
-        }
-
-        if (!m_IsGrounded && m_Rigidbody.velocity.y < 0)
-        {
-            m_Animator.SetBool("Falling", true);
-        }
-        else
-        {
-            m_Animator.SetBool("Falling", false);
-        }
-
-        m_Animator.SetBool("Grounded", m_IsGrounded);
-        if (m_Grabbed)
-        {
-           // if(Input.GetKeyDown(KeyCode.W))
-          //  {
-         //       m_Animator.SetTrigger("UpGrab");
-          //  }
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                m_Animator.SetTrigger("DownGrab");
-            }
-            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S))
-            {
-                m_Animator.SetTrigger("Grab");
-                ActivateGrabCollider();
-            }
-
-        }
-        // Flip the player
-        if (!m_IsActing)
-        {
-            if (GoingRight && m_Horizontal < 0)
+            // Applying movement
+            m_Rigidbody.velocity = new Vector2(m_Horizontal * m_Speed, m_Rigidbody.velocity.y);
+            if(GoingRight && m_Horizontal < 0)
             {
                 GoingRight = false;
             }
@@ -182,67 +97,61 @@ public class RobotController : MonoBehaviour
                 GoingRight = true;
             }
         }
-    }
 
-    public void StartedAction()
-    {
-        m_IsActing = true;
-    }
 
-    public void FinishedAction()
-    {
-        m_IsActing = false;
     }
-
-    public void ActivateGrabCollider()
+    private void HandleGrab()
     {
-        switch(m_ThisBlockCarried)
+        if (m_GrabPressed && m_GrabbedBlock == null)
         {
-            case BLOCK_CARRIED.NOTHING:
-            m_HorizontalGrabCollider.SetActive(true);
-            break;
-            case BLOCK_CARRIED.BLUE:
-           
-                break;
-            case BLOCK_CARRIED.RED:
-                m_Block.gameObject.GetComponent<BlockController>().ActivateBlock();
-                break;
-            case BLOCK_CARRIED.GREEN:
-
-                break;
-            case BLOCK_CARRIED.YELLOW:
-
-                break;
+            if (m_Vertical > 0)
+            {
+                m_HorizontalGrabCollider.SetActive(false);
+                m_UpGrabCollider.SetActive(true);
+                m_DownGrabCollider.SetActive(false);
+            }
+            else if (m_Vertical < 0)
+            {
+                m_HorizontalGrabCollider.SetActive(false);
+                m_UpGrabCollider.SetActive(false);
+                m_DownGrabCollider.SetActive(true);
+            }
+            else
+            {
+                m_HorizontalGrabCollider.SetActive(true);
+                m_UpGrabCollider.SetActive(false);
+                m_DownGrabCollider.SetActive(false);
+            }
+        }
+        
+    }
+    public void GrabBlock(GameObject Block)
+    {
+        m_GrabbedBlock = Block;
+        m_GrabbedBlock.SetActive(false);
+        m_HorizontalGrabCollider.SetActive(false);
+        m_UpGrabCollider.SetActive(false);
+        m_DownGrabCollider.SetActive(false);
+    }
+    private void DropBlock()
+    {
+        if (m_GrabPressed && m_GrabbedBlock != null)
+        {
+            
+            if (Input.GetKeyDown(KeyCode.W) || (Input.GetKeyDown(KeyCode.UpArrow)))
+            {
+                m_GrabbedBlock.transform.position = m_UpGrabCollider.transform.position;
+            }
+            else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                m_GrabbedBlock.transform.position = m_DownGrabCollider.transform.position;
+            }
+            else
+            {
+                m_GrabbedBlock.transform.position = m_HorizontalGrabCollider.transform.position;
+            }
+            m_GrabbedBlock.SetActive(true);
+            m_GrabbedBlock = null;
         }
     }
-
-    public void DeactivateUpGrabCollider()
-    {
-        m_UpGrabCollider.SetActive(false);
-    }
-    public void ActivateInteractor()
-    {
-
-    }
-    public void DeactivateInteractor()
-    {
-
-    }
-
-    private void SpawnArrow()
-    {
-        //GameObject newArrow = GameObject.Instantiate(m_Arrow, m_ArrowSpawnPoint.position, m_ArrowSpawnPoint.rotation);
-        //newArrow.GetComponent<ArrowController>().ShootArrow(GoingRight);
-    }
-
-    private void HandleDeath()
-    {
-
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-
-    }
-
 }
