@@ -633,5 +633,9 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 7593173427336193915, guid: eb3c4b5b10aafb64fab7a2388e685620, type: 3}
+      propertyPath: m_Name
+      value: HurtBox
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb3c4b5b10aafb64fab7a2388e685620, type: 3}
