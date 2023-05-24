@@ -26,29 +26,18 @@ public class BlockController : MonoBehaviour
         if (collision.gameObject.layer is 7) //if it hits a block or the ground
         {
             
-            if (collision.gameObject.transform.position.y < transform.position.y) //if it's above
+            if (transform.position.y > collision.transform.position.y) //if it's above
             {
-                transform.position = new Vector2(collision.gameObject.transform.position.x, transform.position.y);
-                //float PositionDifference = transform.position.x - collision.gameObject.transform.position.x;
-                //if (PositionDifference==0)
-                //{
-                //    return;
-                //}
-                //else if (Math.Abs(PositionDifference) >= m_Collider2D.size.x /2)
-                ////Put it on top of it
-                //{
-                //transform.position = new Vector2(collision.gameObject.transform.position.x, transform.position.y);
-                //}
-                //else if (PositionDifference > 0) //move it off the block to the right
-                //{
-                //    transform.position = new Vector2(transform.position.x + PositionDifference,transform.position.y);
-                //}
-                //else  //move it off the block to the left
-                //{
-                //    transform.position = new Vector2(transform.position.x - PositionDifference, transform.position.y);
-                //}
+                float DistanceX = transform.position.x - collision.transform.position.x;
+                if (Mathf.Abs(DistanceX)< m_Collider2D.bounds.extents.x)
+                {
+                    transform.position += new Vector3(DistanceX, 0, 0);
+                }
+                else
+                {
+                    transform.position = new Vector3(collision.gameObject.transform.position.x, transform.position.y,transform.position.z);
+                }               
             }
-
         }
     }
     private void OnTriggerEnter2D(Collider2D other)
@@ -57,5 +46,9 @@ public class BlockController : MonoBehaviour
         {
             other.gameObject.GetComponentInParent<RobotController>().GrabBlock(gameObject);
         }
+    }
+    private void OnDestroy()
+    {
+        
     }
 }

@@ -32,8 +32,6 @@ public class RobotController : MonoBehaviour
     //Movement variables
     public float m_Speed;
     public float m_JumpForce;
-    public float m_GravityScaleJumping = 1f;
-    public float m_GravityScaleFalling = 1f;
     public bool m_IsGrounded;
     // Grab variables
     public GameObject m_HorizontalGrabCollider;
@@ -72,14 +70,6 @@ public class RobotController : MonoBehaviour
         if (m_JumpPressed && m_IsGrounded && !m_IsActing)
         {
             m_Rigidbody.AddForce(Vector2.up * m_JumpForce);
-        }
-        if (m_Rigidbody.velocity.y > 0)
-        {
-            m_Rigidbody.gravityScale = m_GravityScaleJumping;
-        }
-        else if (m_Rigidbody.velocity.y < 0)
-        {
-            m_Rigidbody.gravityScale = m_GravityScaleFalling;
         }
     }
     private void HandleMovement()
