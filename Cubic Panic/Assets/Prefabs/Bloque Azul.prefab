@@ -147,4 +147,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Collider2D: {fileID: 0}
-  ThisBlockColor: 2
+  m_InicioCuadricula: {fileID: 0}
+  ThisBlockColor: 1

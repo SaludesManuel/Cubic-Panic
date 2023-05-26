@@ -6,9 +6,11 @@ using UnityEngine;
 public class BlockController : MonoBehaviour
 {
     public BoxCollider2D m_Collider2D;
+    public Rigidbody2D m_Rigidbody2D;
+    public Transform m_InicioCuadricula;
+    public GameObject m_ScoreNumber;
     public enum COLOR
     { 
-        NONE,
         RED,
         BLUE,
         GREEN,
@@ -19,6 +21,8 @@ public class BlockController : MonoBehaviour
     private void Start()
     {
         m_Collider2D = GetComponent<BoxCollider2D>();
+        m_Rigidbody2D = GetComponent<Rigidbody2D>();
+        m_Rigidbody2D.gravityScale = 0;
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -28,15 +32,7 @@ public class BlockController : MonoBehaviour
             
             if (transform.position.y > collision.transform.position.y) //if it's above
             {
-                float DistanceX = transform.position.x - collision.transform.position.x;
-                if (Mathf.Abs(DistanceX)< m_Collider2D.bounds.extents.x)
-                {
-                    transform.position += new Vector3(DistanceX, 0, 0);
-                }
-                else
-                {
-                    transform.position = new Vector3(collision.gameObject.transform.position.x, transform.position.y,transform.position.z);
-                }               
+                transform.position = new Vector2(collision.gameObject.transform.position.x, transform.position.y);
             }
         }
     }
@@ -47,8 +43,30 @@ public class BlockController : MonoBehaviour
             other.gameObject.GetComponentInParent<RobotController>().GrabBlock(gameObject);
         }
     }
+    public float Module(Vector2 Vector)
+    {
+
+        float value = Mathf.Sqrt((Vector.x * Vector.x) + (Vector.y * Vector.y));
+        return value;
+    }
+    private void OnEnable()
+    {
+        Vector2 PositionToWarp = m_InicioCuadricula.position;
+        for (float i = m_InicioCuadricula.position.x; i < m_InicioCuadricula.position.x + 8; i += 1)
+        {
+            for (float j = m_InicioCuadricula.position.y; j > m_InicioCuadricula.position.y - 8; j -= 1)
+            {
+                Vector2 Distance = new Vector2(i - transform.position.x, j - transform.position.y);
+                if (Module(PositionToWarp) < Module(Distance))
+                {
+                    PositionToWarp = Distance;
+                }
+            }
+        }
+        transform.position = PositionToWarp;
+    }
     private void OnDestroy()
     {
-        
+        m_ScoreNumber.GetComponent<ScoreController>().GainPoints(100);
     }
 }
