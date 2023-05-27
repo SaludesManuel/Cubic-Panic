@@ -111,7 +111,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5.733273, y: 5.733273}
+  m_Size: {x: 5.582186, y: 5.582186}
   m_EdgeRadius: 0
 --- !u!50 &22353068932071470
 Rigidbody2D:
@@ -146,6 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7eb4e7fd191772446a4a263d4e133bf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Collider2D: {fileID: 0}
-  m_InicioCuadricula: {fileID: 0}
-  ThisBlockColor: 2
+  m_InicioCuadricula: {fileID: 4473716637736516614, guid: 0864b9795fcde16468a3180477337539, type: 3}
+  m_Score: {fileID: 0}
+  m_PointsGained: 100
+  ThisBlockColor: 3

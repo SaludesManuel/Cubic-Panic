@@ -8,6 +8,7 @@ public class RobotController : MonoBehaviour
     private Rigidbody2D m_Rigidbody;
     private Animator m_Animator;
     public GameObject m_GrabbedBlock;
+    private SpriteRenderer m_SpriteRenderer;
     // Player flipping
     private bool m_GoingRight;
 
@@ -44,6 +45,7 @@ public class RobotController : MonoBehaviour
         m_GoingRight = true;
         m_Rigidbody = GetComponent<Rigidbody2D>();
         m_Animator = GetComponent<Animator>();
+        m_SpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -52,7 +54,6 @@ public class RobotController : MonoBehaviour
         HandleInputs();
         HandleJump();
         HandleGrab();
-        DropBlock();
     }
     private void FixedUpdate()
     {
@@ -92,31 +93,47 @@ public class RobotController : MonoBehaviour
     }
     private void HandleGrab()
     {
-        if (m_GrabPressed && m_GrabbedBlock == null)
+        if (m_GrabPressed)
         {
-            if (m_Vertical > 0)
+            if (m_GrabbedBlock == null)
             {
-                m_HorizontalGrabCollider.SetActive(false);
-                m_UpGrabCollider.SetActive(true);
-                m_DownGrabCollider.SetActive(false);
-            }
-            else if (m_Vertical < 0)
-            {
-                m_HorizontalGrabCollider.SetActive(false);
-                m_UpGrabCollider.SetActive(false);
-                m_DownGrabCollider.SetActive(true);
+                //try to grab something
+                if (m_Vertical > 0)
+                {
+                    m_HorizontalGrabCollider.SetActive(false);
+                    m_UpGrabCollider.SetActive(true);
+                    m_DownGrabCollider.SetActive(false);
+                }
+                else if (m_Vertical < 0)
+                {
+                    m_HorizontalGrabCollider.SetActive(false);
+                    m_UpGrabCollider.SetActive(false);
+                    m_DownGrabCollider.SetActive(true);
+                }
+                else
+                {
+                    m_HorizontalGrabCollider.SetActive(true);
+                    m_UpGrabCollider.SetActive(false);
+                    m_DownGrabCollider.SetActive(false);
+                }
+                StartCoroutine(FailedGrab());
             }
             else
             {
-                m_HorizontalGrabCollider.SetActive(true);
-                m_UpGrabCollider.SetActive(false);
-                m_DownGrabCollider.SetActive(false);
+                DropBlock();
             }
         }
-        
     }
-    public void GrabBlock(GameObject Block)
+    public IEnumerator FailedGrab()
     {
+        yield return new WaitForSeconds(1);
+        m_HorizontalGrabCollider.SetActive(false);
+        m_UpGrabCollider.SetActive(false);
+        m_DownGrabCollider.SetActive(false);
+    }
+    public void SuccessfulGrab(GameObject Block)
+    {
+        StopCoroutine(FailedGrab());
         m_GrabbedBlock = Block;
         m_GrabbedBlock.SetActive(false);
         m_HorizontalGrabCollider.SetActive(false);
@@ -125,9 +142,6 @@ public class RobotController : MonoBehaviour
     }
     private void DropBlock()
     {
-        if (m_GrabPressed && m_GrabbedBlock != null)
-        {
-            
             if (Input.GetKeyDown(KeyCode.W) || (Input.GetKeyDown(KeyCode.UpArrow)))
             {
                 m_GrabbedBlock.transform.position = m_UpGrabCollider.transform.position;
@@ -141,7 +155,7 @@ public class RobotController : MonoBehaviour
                 m_GrabbedBlock.transform.position = m_HorizontalGrabCollider.transform.position;
             }
             m_GrabbedBlock.SetActive(true);
+            m_GrabbedBlock.transform.position = m_GrabbedBlock.GetComponent<BlockController>().DeterminePosition();
             m_GrabbedBlock = null;
-        }
     }
 }

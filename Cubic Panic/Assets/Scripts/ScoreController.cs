@@ -8,23 +8,11 @@ public class ScoreController : MonoBehaviour
     public static ScoreController m_Score;
     private TextMeshProUGUI m_Text;
     public int m_Points = 0;
-    public void Awake()
-    {
-        //Singleton
-        if (m_Score != null && m_Score != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            m_Score = this;
-        }
-    }
     // Start is called before the first frame update
     void Start()
     {
         m_Text = GetComponent<TextMeshProUGUI>();
-        GainPoints(-m_Points); 
+        m_Points = 0; m_Text.text = 0.ToString();
     }
     public void GainPoints(int PointsGet)
     {
