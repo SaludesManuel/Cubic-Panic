@@ -155,7 +155,7 @@ public class RobotController : MonoBehaviour
                 m_GrabbedBlock.transform.position = m_HorizontalGrabCollider.transform.position;
             }
             m_GrabbedBlock.SetActive(true);
-            m_GrabbedBlock.transform.position = m_GrabbedBlock.GetComponent<BlockController>().DeterminePosition();
+            //m_GrabbedBlock.transform.position = m_GrabbedBlock.GetComponent<BlockController>().DeterminePosition();
             m_GrabbedBlock = null;
     }
 }
