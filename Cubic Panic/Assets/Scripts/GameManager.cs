@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
 
     public float m_BoxCasterX;
     public float m_BoxCasterY;
-    public int m_LayersToCollide;
+    public LayerMask m_LayersToCollide;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,7 +39,13 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        for (int i = 0; i < 10; i++)
+        {
+            for (int j = 0; j < 8; j++)
+            {
+                GroundCheck(new Vector3(m_HorizontalPositions[i].position.y,m_VerticalPositions[j].position.x,0));
+            }
+        }
     }
 
     bool GroundCheck(Vector3 raycastOrigin)
@@ -47,7 +53,7 @@ public class GameManager : MonoBehaviour
         // Cast a ray straight down.
         RaycastHit2D hit = Physics2D.BoxCast(raycastOrigin, new Vector3(m_BoxCasterX, m_BoxCasterY), 0f, Vector3.up, 0, m_LayersToCollide);
 
-        // If it hits something and that something is not a trigger...
+        // If it hits something (only can hit with boxes)
         if (hit.collider != null)
         {
             Debug.DrawRay(raycastOrigin + new Vector3(m_BoxCasterX, 0), Vector2.down * (m_BoxCasterY), Color.blue);

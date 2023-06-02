@@ -1740,7 +1740,9 @@ MonoBehaviour:
   - {fileID: 212822558}
   m_BoxCasterX: 0
   m_BoxCasterY: 0
-  m_LayersToCollide: 0
+  m_LayersToCollide:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!4 &1656334076
 Transform:
   m_ObjectHideFlags: 0

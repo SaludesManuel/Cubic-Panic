@@ -18,11 +18,16 @@ public class MenuManager : MonoBehaviour
 
     public void LoadGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("Game");
     }
 
     public void ExitGame()
     {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
         Application.Quit();
+#endif
+
     }
 }
