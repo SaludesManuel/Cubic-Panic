@@ -38,6 +38,14 @@ public class RobotController : MonoBehaviour
     public GameObject m_HorizontalGrabCollider;
     public GameObject m_UpGrabCollider;
     public GameObject m_DownGrabCollider;
+    //DropBlock positions
+    public Transform[] m_HorizontalPositions;
+    public Transform[] m_VerticalPositions;
+    float m_AuxHorDiff;
+    float m_AuxVerDiff;                               
+    float m_ClosestHorPos;
+    float m_ClosestVerPos;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -140,22 +148,86 @@ public class RobotController : MonoBehaviour
         m_UpGrabCollider.SetActive(false);
         m_DownGrabCollider.SetActive(false);
     }
+
     private void DropBlock()
     {
-            if (Input.GetKeyDown(KeyCode.W) || (Input.GetKeyDown(KeyCode.UpArrow)))
+        float closestHorizontalPos = float.MaxValue;
+        float closestVerticalPos = float.MaxValue;
+
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            for (int i = 0; i < m_HorizontalPositions.Length; i++)
             {
-                m_GrabbedBlock.transform.position = m_UpGrabCollider.transform.position;
+                float horizontalDiff = Mathf.Abs(m_HorizontalPositions[i].position.y - m_UpGrabCollider.transform.position.y);
+                if (horizontalDiff < closestHorizontalPos)
+                {
+                    closestHorizontalPos = horizontalDiff;
+                    m_ClosestHorPos = m_HorizontalPositions[i].position.y;
+                }
             }
-            else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+
+            for (int j = 0; j < m_VerticalPositions.Length; j++)
             {
-                m_GrabbedBlock.transform.position = m_DownGrabCollider.transform.position;
+                float verticalDiff = Mathf.Abs(m_VerticalPositions[j].position.x - m_UpGrabCollider.transform.position.x);
+                if (verticalDiff < closestVerticalPos)
+                {
+                    closestVerticalPos = verticalDiff;
+                    m_ClosestVerPos = m_VerticalPositions[j].position.x;
+                }
             }
-            else
+            m_GrabbedBlock.transform.position = new Vector2(m_ClosestVerPos, m_ClosestHorPos);
+        }
+        else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+        {
+        for (int i = 0; i < m_HorizontalPositions.Length; i++)
             {
-                m_GrabbedBlock.transform.position = m_HorizontalGrabCollider.transform.position;
+                float horizontalDiff = Mathf.Abs(m_HorizontalPositions[i].position.y - m_DownGrabCollider.transform.position.y);
+                if (horizontalDiff < closestHorizontalPos)
+                {
+                    closestHorizontalPos = horizontalDiff;
+                    m_ClosestHorPos = m_HorizontalPositions[i].position.y;
+                }
             }
-            m_GrabbedBlock.SetActive(true);
-            //m_GrabbedBlock.transform.position = m_GrabbedBlock.GetComponent<BlockController>().DeterminePosition();
-            m_GrabbedBlock = null;
+
+            for (int j = 0; j < m_VerticalPositions.Length; j++)
+            {
+                float verticalDiff = Mathf.Abs(m_VerticalPositions[j].position.x - m_DownGrabCollider.transform.position.x);
+                if (verticalDiff < closestVerticalPos)
+                {
+                    closestVerticalPos = verticalDiff;
+                    m_ClosestVerPos = m_VerticalPositions[j].position.x;
+                }
+            }
+
+            m_GrabbedBlock.transform.position = new Vector2(m_ClosestVerPos, m_ClosestHorPos);
+        }
+        else
+        {
+            for (int i = 0; i < m_HorizontalPositions.Length; i++)
+            {
+                float horizontalDiff = Mathf.Abs(m_HorizontalPositions[i].position.y - m_HorizontalGrabCollider.transform.position.y);
+                if (horizontalDiff < closestHorizontalPos)
+                {
+                    closestHorizontalPos = horizontalDiff;
+                    m_ClosestHorPos = m_HorizontalPositions[i].position.y;
+                }
+            }
+
+            for (int j = 0; j < m_VerticalPositions.Length; j++)
+            {
+                float verticalDiff = Mathf.Abs(m_VerticalPositions[j].position.x - m_HorizontalGrabCollider.transform.position.x);
+                if (verticalDiff < closestVerticalPos)
+                {
+                    closestVerticalPos = verticalDiff;
+                    m_ClosestVerPos = m_VerticalPositions[j].position.x;
+                }
+            }
+
+            m_GrabbedBlock.transform.position = new Vector2(m_ClosestVerPos, m_ClosestHorPos);
+        }
+
+        m_GrabbedBlock.SetActive(true);
+        m_GrabbedBlock = null;
     }
 }
+
