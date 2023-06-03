@@ -154,7 +154,7 @@ public class RobotController : MonoBehaviour
         float closestHorizontalPos = float.MaxValue;
         float closestVerticalPos = float.MaxValue;
 
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
             for (int i = 0; i < m_HorizontalPositions.Length; i++)
             {
@@ -177,7 +177,7 @@ public class RobotController : MonoBehaviour
             }
             m_GrabbedBlock.transform.position = new Vector2(m_ClosestVerPos, m_ClosestHorPos);
         }
-        else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+        else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
         {
         for (int i = 0; i < m_HorizontalPositions.Length; i++)
             {
