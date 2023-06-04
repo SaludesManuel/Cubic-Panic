@@ -66,6 +66,7 @@ public class RobotController : MonoBehaviour
     private void FixedUpdate()
     {
         HandleMovement();
+        HandleAnimations();
     }
     private void HandleInputs()
     {
@@ -108,18 +109,21 @@ public class RobotController : MonoBehaviour
                 //try to grab something
                 if (m_Vertical > 0)
                 {
+                    m_Animator.SetFloat("Grab",1);
                     m_HorizontalGrabCollider.SetActive(false);
                     m_UpGrabCollider.SetActive(true);
                     m_DownGrabCollider.SetActive(false);
                 }
                 else if (m_Vertical < 0)
                 {
+                    m_Animator.SetFloat("Grab", -1f);
                     m_HorizontalGrabCollider.SetActive(false);
                     m_UpGrabCollider.SetActive(false);
                     m_DownGrabCollider.SetActive(true);
                 }
                 else
                 {
+                    m_Animator.SetFloat("Grab", 0);
                     m_HorizontalGrabCollider.SetActive(true);
                     m_UpGrabCollider.SetActive(false);
                     m_DownGrabCollider.SetActive(false);
@@ -156,6 +160,7 @@ public class RobotController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
+            m_Animator.SetFloat("Drop", 1);
             for (int i = 0; i < m_HorizontalPositions.Length; i++)
             {
                 float horizontalDiff = Mathf.Abs(m_HorizontalPositions[i].position.y - m_UpGrabCollider.transform.position.y);
@@ -179,7 +184,8 @@ public class RobotController : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
         {
-        for (int i = 0; i < m_HorizontalPositions.Length; i++)
+            m_Animator.SetFloat("Drop", -1f);
+            for (int i = 0; i < m_HorizontalPositions.Length; i++)
             {
                 float horizontalDiff = Mathf.Abs(m_HorizontalPositions[i].position.y - m_DownGrabCollider.transform.position.y);
                 if (horizontalDiff < closestHorizontalPos)
@@ -203,6 +209,7 @@ public class RobotController : MonoBehaviour
         }
         else
         {
+            m_Animator.SetFloat("Drop", 0);
             for (int i = 0; i < m_HorizontalPositions.Length; i++)
             {
                 float horizontalDiff = Mathf.Abs(m_HorizontalPositions[i].position.y - m_HorizontalGrabCollider.transform.position.y);
@@ -229,5 +236,13 @@ public class RobotController : MonoBehaviour
         m_GrabbedBlock.SetActive(true);
         m_GrabbedBlock = null;
     }
+
+   private void HandleAnimations()
+    {
+        m_Animator.SetFloat("Grab", -2f);
+        m_Animator.SetFloat("Drop", -2f);
+    }
+
+
 }
 

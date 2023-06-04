@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f2a4740cd77be7b4597b6ea0f64a608a
+guid: c8e012aee7057a04b86e97b8d90aa1c7
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -67,7 +67,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 1024
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -101,29 +101,17 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: RobotIdle_0
+      name: Pixilart_Sprite_Sheet_19_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 240
-        height: 240
+        width: 85.416664
+        height: 85
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,20 +119,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3dd3f2a1a6714dc4bbcb04627d297066
-      internalID: -2123246003
+      spriteID: f4df25ca60702ba4b95583b2ae0ff6be
+      internalID: -1625481736
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RobotIdle_1
+      name: Pixilart_Sprite_Sheet_19_1
       rect:
         serializedVersion: 2
-        x: 240
+        x: 85
         y: 0
-        width: 240
-        height: 240
+        width: 85.416664
+        height: 85
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,20 +140,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1a01188ab640fce4faefab6bc4c958df
-      internalID: 724627425
+      spriteID: dad5e18b09bd66642bf3de529542d5b4
+      internalID: 464784914
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RobotIdle_2
+      name: Pixilart_Sprite_Sheet_19_2
       rect:
         serializedVersion: 2
-        x: 480
+        x: 170
         y: 0
-        width: 240
-        height: 240
+        width: 85.416664
+        height: 85
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -173,20 +161,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 747b6a1fa8b3eaf4cae14c559991d5ef
-      internalID: 1451514532
+      spriteID: daa23600a80cf304291f15307dd654e8
+      internalID: 1954693414
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RobotIdle_3
+      name: Pixilart_Sprite_Sheet_19_3
       rect:
         serializedVersion: 2
-        x: 720
+        x: 255
         y: 0
-        width: 240
-        height: 240
+        width: 85.416664
+        height: 85
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -194,20 +182,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4c3285ded01598949aa32521bcfb8e71
-      internalID: 2117258199
+      spriteID: ccc3409b099314544a2e94c7adeff866
+      internalID: 491266370
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RobotIdle_4
+      name: Pixilart_Sprite_Sheet_19_4
       rect:
         serializedVersion: 2
-        x: 960
+        x: 340
         y: 0
-        width: 240
-        height: 240
+        width: 85.416664
+        height: 85
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -215,20 +203,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2479aa63a8d93674496c30db54225313
-      internalID: -1008526223
+      spriteID: 231504e68e841a2428d3bba1b6517639
+      internalID: -1057119373
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RobotIdle_5
+      name: Pixilart_Sprite_Sheet_19_5
       rect:
         serializedVersion: 2
-        x: 1200
+        x: 425
         y: 0
-        width: 240
-        height: 240
+        width: 85.416664
+        height: 85
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -236,8 +224,113 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c37017cd9fd2ce149b00e2513df794f7
-      internalID: 1992455291
+      spriteID: 3b88916210fed2243badec27d7edc72f
+      internalID: -1278250060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pixilart_Sprite_Sheet_19_6
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 0
+        width: 85.416664
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be9a059ef8a967c43a8b24d4e9439952
+      internalID: 1246100729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pixilart_Sprite_Sheet_19_7
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 0
+        width: 85.416664
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4120f8e17b6a2a47a293a52224fa67c
+      internalID: -649911314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pixilart_Sprite_Sheet_19_8
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 0
+        width: 85.416664
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a05bcd297ecfcb946bfae4f19f87503d
+      internalID: -687045038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pixilart_Sprite_Sheet_19_9
+      rect:
+        serializedVersion: 2
+        x: 765
+        y: 0
+        width: 85.416664
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f93e2e6ec3cf69747894d8325383991f
+      internalID: 2006682273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pixilart_Sprite_Sheet_19_10
+      rect:
+        serializedVersion: 2
+        x: 850
+        y: 0
+        width: 85.416664
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 329ae19376e074748a5167ac49e47225
+      internalID: -1673541124
       vertices: []
       indices: 
       edges: []
@@ -253,12 +346,17 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      RobotIdle_1: 724627425
-      RobotIdle_5: 1992455291
-      RobotIdle_3: 2117258199
-      RobotIdle_2: 1451514532
-      RobotIdle_0: -2123246003
-      RobotIdle_4: -1008526223
+      Pixilart_Sprite_Sheet_19_8: -687045038
+      Pixilart_Sprite_Sheet_19_0: -1625481736
+      Pixilart_Sprite_Sheet_19_7: -649911314
+      Pixilart_Sprite_Sheet_19_4: -1057119373
+      Pixilart_Sprite_Sheet_19_5: -1278250060
+      Pixilart_Sprite_Sheet_19_2: 1954693414
+      Pixilart_Sprite_Sheet_19_3: 491266370
+      Pixilart_Sprite_Sheet_19_6: 1246100729
+      Pixilart_Sprite_Sheet_19_1: 464784914
+      Pixilart_Sprite_Sheet_19_10: -1673541124
+      Pixilart_Sprite_Sheet_19_9: 2006682273
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
